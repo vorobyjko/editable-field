@@ -9,7 +9,7 @@ Write angular directive for edit-in-place.
 To run application:
 
 - clone repo https://github.com/vorobyjko/editable-field.git
-- run npm install (you should have node.js installed)
 - open git bash in the root of the project
+- run npm install (you should have node.js installed)
 - run gulp (gulp server will be listening 0.0.0.0:8080)
 - open the browser and go to 'localhost' 
