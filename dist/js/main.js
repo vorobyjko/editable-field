@@ -30440,8 +30440,8 @@ app.directive('editableField', function($compile) {
   var savedValue = undefined;
   var templates = {
     defaultView: "<span ng-dblclick='dblClickHandler()'>{{value}}</span>",
-    inputView: "<input type='text' ng-model='value' ng-keydown='onKeyUpHandler($event)'>",
-    selectView: "<select ng-model='value' ng-keydown='onKeyUpHandler($event)'><option ng-repeat='item in items' value='{{item.name}}'>{{item.name}}</option></select>"
+    inputView: "<input type='text' ng-model='value' ng-keydown='onKeyDownHandler($event)'>",
+    selectView: "<select ng-model='value' ng-keydown='onKeyDownHandler($event)'><option ng-repeat='item in items' value='{{item.name}}'>{{item.name}}</option></select>"
   }
 
   return {
@@ -30491,7 +30491,7 @@ app.directive('editableField', function($compile) {
         $scope.doRender(element, attrs);
       }
 
-      $scope.onKeyUpHandler = function($event) {
+      $scope.onKeyDownHandler = function($event) {
         if ($event.keyCode === 13) {
           $scope.doRender(element);
         }
