@@ -2,6 +2,8 @@ var angularModule = require('angular');
 
 var app = angular.module('app', []);
 
+app.controller('controller', function($scope) {});
+
 app.directive('editableField', function($compile) {
   var savedValue = undefined;
   var templates = {
@@ -13,13 +15,18 @@ app.directive('editableField', function($compile) {
   return {
     restrict: "E",
     replace: true,
-    scope: true,
+    scope: {
+      value: '@model',
+      options: '=items'
+    },
     
     controller: function($scope) {
       $scope.items = [
         {id: '1', name: 'Option A'},
         {id: '2', name: 'Option B'},
-        {id: '3', name: 'Option C'}
+        {id: '3', name: 'Option C'},
+        {id: '4', name: 'Option C'},
+        {id: '5', name: 'Option C'}
       ],
 
       $scope.doRender = function(element, attrs) {
@@ -39,22 +46,21 @@ app.directive('editableField', function($compile) {
         $scope.value = savedValue;
       },
 
-      $scope.setValue = function(value) {
-        $scope.value = value;
-      },
-
       $scope.getTemplate = function(viewType) {
         return templates[viewType ? viewType + 'View' : 'defaultView'];
       }
     },
 
     link: function($scope, element, attrs) {
-      $scope.setValue(attrs.model);
       $scope.doRender(element);
 
       $scope.dblClickHandler = function() {
         $scope.saveValue($scope.value);
         $scope.doRender(element, attrs);
+
+        if (attrs.type === 'input') {
+          element.find('input')[0].focus();
+        }
       }
 
       $scope.onKeyDownHandler = function($event) {
