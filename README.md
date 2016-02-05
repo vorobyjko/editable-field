@@ -11,5 +11,5 @@ To run application:
 - clone repo https://github.com/vorobyjko/editable-field.git
 - run npm install (you should have node.js installed)
 - open git bash in the root of the project
-- run gulp (gulp server will be listening 0.0.0.0)
+- run gulp (gulp server will be listening 0.0.0.0:8080)
 - open the browser and go to 'localhost' 
