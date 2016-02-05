@@ -30436,14 +30436,20 @@ var angularModule = require('angular');
 
 var app = angular.module('app', []);
 
-app.controller('controller', function($scope) {});
+app.controller('controller', function($scope) {
+  $scope.items = [
+          {id: '1', name: 'Option A'},
+          {id: '2', name: 'Option B'},
+          {id: '3', name: 'Option C'}
+        ]
+  });
 
 app.directive('editableField', function($compile) {
   var savedValue = undefined;
   var templates = {
     defaultView: "<span ng-dblclick='dblClickHandler()'>{{value}}</span>",
     inputView: "<input type='text' ng-model='value' ng-keydown='onKeyDownHandler($event)'>",
-    selectView: "<select ng-model='value' ng-keydown='onKeyDownHandler($event)'><option ng-repeat='item in items' value='{{item.name}}'>{{item.name}}</option></select>"
+    selectView: "<select ng-model='value' ng-keydown='onKeyDownHandler($event)'><option ng-repeat='item in options' value='{{item.name}}'>{{item.name}}</option></select>"
   }
 
   return {
@@ -30451,18 +30457,10 @@ app.directive('editableField', function($compile) {
     replace: true,
     scope: {
       value: '@model',
-      options: '=items'
+      options: '=customOptions'
     },
     
     controller: function($scope) {
-      $scope.items = [
-        {id: '1', name: 'Option A'},
-        {id: '2', name: 'Option B'},
-        {id: '3', name: 'Option C'},
-        {id: '4', name: 'Option C'},
-        {id: '5', name: 'Option C'}
-      ],
-
       $scope.doRender = function(element, attrs) {
         var viewType = attrs ? attrs.type : '';
         var view = $scope.getTemplate(viewType);
